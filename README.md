@@ -13,6 +13,7 @@ A chatbot for Whatsapp, powered by OpenAI's GPT-3 language model and the chatgpt
 2. Install the dependencies with `npm install`.
 3. Add your API KEY after creating `.env` file. See [.env.example](./.env.example)
 4. Start the bot with `npm start`.
+5. Optionally you can add discord webhook url in `.env` to get logs on discord
 
 # Usage
 

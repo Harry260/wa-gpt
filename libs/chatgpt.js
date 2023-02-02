@@ -1,5 +1,5 @@
 import "dotenv/config";
-
+import discordLog from "./discord-log.js";
 import { ChatGPTAPI } from "chatgpt";
 
 const OpenAIConfig = {
@@ -12,9 +12,11 @@ async function getResponse(prompt, args) {
   try {
     const res = await api.sendMessage(prompt, args);
     console.log("[✔] Response: ", res.text);
+
     return res;
   } catch (e) {
     console.log("[✘] Error: ", e, "\n");
+    discordLog("Error", prompt, e);
     return false;
   }
 }
