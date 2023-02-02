@@ -1,22 +1,29 @@
 import "dotenv/config";
 import discordLog from "./discord-log.js";
-import { ChatGPTAPI } from "chatgpt";
+import { oraPromise } from "ora";
+import { ChatGPTAPIBrowser } from "chatgpt";
 
 const OpenAIConfig = {
-  apiKey: process.env.OPENAI_API_KEY,
+  email: process.env.OPENAI_EMAIL,
+  password: process.env.OPENAI_PASSWORD,
+  debug: false,
+  minimize: true,
 };
-const api = new ChatGPTAPI(OpenAIConfig);
 
-async function getResponse(prompt, args) {
+const api = new ChatGPTAPIBrowser(OpenAIConfig);
+await api.initSession();
+
+async function getResponse(prompt, args = {}) {
   console.log("\n[⇢] Prompt: ", prompt);
   try {
-    const res = await api.sendMessage(prompt, args);
-    console.log("[✔] Response: ", res.text);
+    const res = await oraPromise(api.sendMessage(prompt, args), {
+      text: prompt,
+    });
 
     return res;
   } catch (e) {
     console.log("[✘] Error: ", e, "\n");
-    discordLog("Error", prompt, e);
+    discordLog(prompt, e, true);
     return false;
   }
 }

@@ -37,4 +37,3 @@ function discordLog(title, description, error = false, extra = "") {
 }
 
 export default discordLog;
-discordLog("hi", "dasd", true);

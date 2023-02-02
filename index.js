@@ -2,7 +2,7 @@ import qrcode from "qrcode-terminal";
 import WhatsApp from "whatsapp-web.js";
 import getResponse from "./libs/chatgpt.js";
 import { setCID, getCID } from "./libs/conversationManager.js";
-import discordLog from "./discord-log.js";
+import discordLog from "./libs/discord-log.js";
 
 const { Client, LocalAuth } = WhatsApp;
 
@@ -37,11 +37,11 @@ client.on("message", (message) => {
       if (res) {
         setCID(message.from, {
           conversationId: res.conversationId,
-          parentMessageId: res.id,
+          parentMessageId: res.messageId,
         });
 
-        await message.reply(res.text);
-        discordLog(message.body.res.text, false, "From " + message.from);
+        await message.reply(res.response);
+        discordLog(message.body, res.response, false, "From " + message.from);
       } else {
         await message.reply(
           "Due to high amount of requests flooding into the server, i'm unable to process the message. Please wait few minutes."

@@ -5,13 +5,13 @@ A chatbot for Whatsapp, powered by OpenAI's GPT-3 language model and the chatgpt
 ## Requirements
 
 - Node.js 19 or above
-- [OpenAI](https://openai.com) API KEY
+- [OpenAI](https://openai.com) account
 
 # Installation
 
 1. Clone this repository.
 2. Install the dependencies with `npm install`.
-3. Add your API KEY after creating `.env` file. See [.env.example](./.env.example)
+3. Add your email and password after creating `.env` file. See [.env.example](./.env.example)
 4. Start the bot with `npm start`.
 5. Optionally you can add discord webhook url in `.env` to get logs on discord
 
