@@ -27,9 +27,13 @@ function getCID(number) {
   }
 }
 
-function setCID(number, data) {
+function setCID(number, res) {
+  var CIDs = {
+    conversationId: res.conversationId,
+    parentMessageId: res.messageId,
+  };
   try {
-    db.data[number] = data;
+    db.data[number] = CIDs;
     db.write();
 
     return data;

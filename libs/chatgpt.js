@@ -14,7 +14,6 @@ const api = new ChatGPTAPIBrowser(OpenAIConfig);
 await api.initSession();
 
 async function getResponse(prompt, args = {}) {
-  console.log("\n[⇢] Prompt: ", prompt);
   try {
     const res = await oraPromise(api.sendMessage(prompt, args), {
       text: prompt,
@@ -22,10 +21,9 @@ async function getResponse(prompt, args = {}) {
 
     return res;
   } catch (e) {
-    console.log("[✘] Error: ", e, "\n");
     discordLog(prompt, e, true);
     return false;
   }
 }
 
-export default getResponse;
+export { getResponse };

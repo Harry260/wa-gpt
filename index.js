@@ -1,8 +1,8 @@
 import qrcode from "qrcode-terminal";
 import WhatsApp from "whatsapp-web.js";
-import getResponse from "./libs/chatgpt.js";
-import { setCID, getCID } from "./libs/conversationManager.js";
 import discordLog from "./libs/discord-log.js";
+import { getResponse } from "./libs/chatgpt.js";
+import { setCID, getCID } from "./libs/conversationManager.js";
 
 const { Client, LocalAuth } = WhatsApp;
 
@@ -33,12 +33,11 @@ client.on("message", (message) => {
 
     var convoId = getCID(message.from);
 
+    console.log(convoId);
     getResponse(message.body, convoId).then(async (res) => {
       if (res) {
-        setCID(message.from, {
-          conversationId: res.conversationId,
-          parentMessageId: res.messageId,
-        });
+        console.log(res);
+        setCID(message.from, res);
 
         await message.reply(res.response);
         discordLog(message.body, res.response, false, "From " + message.from);
